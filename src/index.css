@@ -15,10 +15,6 @@ body {
   height: 100vh;
 }
 
-.sidebar {
-  /* margin: 10px 0px 10px 10px; */
-}
-
 .content {
   flex: 1;
   background-color: #f9fafc;
