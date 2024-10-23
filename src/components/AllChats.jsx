@@ -4,7 +4,7 @@ import InboxCard from "./InboxCard";
 
 const AllChats = () => {
   return (
-    <div className="flex">
+    <div className="flex h-full">
       {/* Chat inbox */}
       <div className="flex flex-col w-full">
         {/* Search input */}
@@ -17,7 +17,7 @@ const AllChats = () => {
           />
         </div>
         {/* Chat inbox cards */}
-        <div className="flex flex-col max-w-[320px] mt-3">
+        <div className="flex flex-col max-w-[320px] mt-3 scroll">
           <InboxCard />
           <InboxCard />
           <InboxCard />
