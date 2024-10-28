@@ -14,7 +14,7 @@ const AllChats = () => {
   return (
     <div className="flex  h-full">
       {/* Chat inbox */}
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-auto max-w-[320px]">
         {/* Search input */}
         <div className="flex items-center relative px-3">
           <MagnifyingGlassIcon className="w-5 h-5 absolute ml-3 text-gray-600" />
