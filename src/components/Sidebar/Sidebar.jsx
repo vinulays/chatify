@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as MessageIcon } from "./../../assets/icons/message.svg";
-import { ReactComponent as BriefCaseIcon } from "./../../assets/icons/briefcase.svg";
-import { ReactComponent as FriendsIcon } from "./../../assets/icons/friends.svg";
-import { ReactComponent as ProfileIcon } from "./../../assets/icons/profile.svg";
-import { ReactComponent as EditIcon } from "./../../assets/icons/edit.svg";
-import { ReactComponent as LogoutIcon } from "./../../assets/icons/logout.svg";
-import { ReactComponent as CallIcon } from "./../../assets/icons/call.svg";
+
+import {
+  ChatBubbleLeftIcon,
+  FolderIcon,
+  UserGroupIcon,
+  PhoneIcon,
+  UserIcon,
+  PencilSquareIcon,
+  ArrowLeftEndOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
   return (
@@ -21,7 +24,7 @@ const Sidebar = () => {
             <li>
               <Link to="/">
                 <div className="flex flex-col  text-gray-400 gap-2.5  justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <MessageIcon className="h-[18px] w-[18px] fill-current" />
+                  <ChatBubbleLeftIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs">All chats</p>
                 </div>
               </Link>
@@ -29,7 +32,7 @@ const Sidebar = () => {
             <li>
               <Link to="/work">
                 <div className="flex flex-col  text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <BriefCaseIcon className="h-[18px] w-[18px] fill-current" />
+                  <FolderIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs">Work</p>
                 </div>
               </Link>
@@ -37,7 +40,7 @@ const Sidebar = () => {
             <li>
               <Link to="/friends">
                 <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <FriendsIcon className="h-[18px] w-[18px] fill-current" />
+                  <UserGroupIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs font-light">Friends</p>
                 </div>
               </Link>
@@ -45,7 +48,7 @@ const Sidebar = () => {
             <li>
               <Link to="/friends">
                 <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <CallIcon className="h-[18px] w-[18px] fill-current" />
+                  <PhoneIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs font-light">Calls</p>
                 </div>
               </Link>
@@ -55,7 +58,7 @@ const Sidebar = () => {
             <li>
               <Link to="/profile">
                 <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <ProfileIcon className="h-[18px] w-[18px] fill-current" />
+                  <UserIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs font-light">Profile</p>
                 </div>
               </Link>
@@ -63,7 +66,7 @@ const Sidebar = () => {
             <li>
               <Link to="/friends">
                 <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-                  <EditIcon className="h-[18px] w-[18px] fill-current" />
+                  <PencilSquareIcon className="h-[20px] w-[20px] fill-current" />
                   <p className="text-xs font-light">Edit</p>
                 </div>
               </Link>
@@ -75,7 +78,7 @@ const Sidebar = () => {
       <div>
         <Link to="/">
           <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-            <LogoutIcon className="h-[18px] w-[18px] fill-current" />
+            <ArrowLeftEndOnRectangleIcon className="h-[20px] w-[20px] fill-current" />
             <p className="text-xs font-light">Log out</p>
           </div>
         </Link>
