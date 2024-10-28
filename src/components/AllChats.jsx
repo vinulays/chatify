@@ -95,7 +95,7 @@ const AllChats = () => {
           {selectedChat.messages.map((message, index) => (
             <div
               key={index}
-              className="bg-gray-200 p-2 rounded-lg mb-4 w-fit max-w-[80%]"
+              className="bg-[#EEEEF8] p-3 rounded-lg mb-4 w-fit max-w-[80%] rounded-bl-none text-sm"
             >
               {message}
             </div>
