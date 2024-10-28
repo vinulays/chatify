@@ -5,7 +5,7 @@ const InboxCard = ({ chat, onClick, isSelected }) => {
   return (
     <div
       className={`w-full flex items-center gap-4 transition duration-300 rounded-xl py-3 pl-3 pr-4 cursor-pointer ${
-        isSelected ? "bg-gray-200" : ""
+        isSelected ? "bg-gray-200" : "hover:bg-gray-100"
       }`}
       onClick={onClick}
     >
@@ -14,7 +14,7 @@ const InboxCard = ({ chat, onClick, isSelected }) => {
         <img
           src={chat.image}
           alt={chat.name}
-          className="h-[60px] w-[60px] rounded-xl object-cover"
+          className="h-[60px] w-[60px] rounded-xl object-cover pointer-events-none"
         />
       </div>
       <div className="flex flex-1 flex-col gap-1.5">
