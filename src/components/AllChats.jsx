@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   PaperAirplaneIcon,
   MicrophoneIcon,
@@ -11,6 +11,43 @@ import { PaperClipIcon } from "@heroicons/react/24/solid";
 import InboxCard from "./InboxCard";
 
 const AllChats = () => {
+  const chats = [
+    {
+      id: 1,
+      name: "Georgiana Aurax",
+      image:
+        "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      lastOnline: "7:30 a.m",
+      messages: ["Hi!", "How are you?", "Let's meet on Monday."],
+      lastMessage: "Let's meet on Monday.",
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      image:
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      lastOnline: "8:45 a.m",
+      messages: ["Hey!", "Are you coming to the meeting?", "Let me know."],
+      lastMessage: "Let me know.",
+    },
+    {
+      id: 3,
+      name: "Jane Smith",
+      image:
+        "https://images.unsplash.com/photo-1541271696563-3be2f555fc4e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      lastOnline: "5:00 p.m",
+      messages: ["Hello!", "I sent the document.", "Check it out."],
+      lastMessage: "Check it out.",
+    },
+    // Add more chat data as needed
+  ];
+
+  const [selectedChat, setSelectedChat] = useState(chats[0]);
+
+  const handleChatSelect = (chat) => {
+    setSelectedChat(chat);
+  };
+
   return (
     <div className="flex  h-full">
       {/* Chat inbox */}
@@ -26,15 +63,14 @@ const AllChats = () => {
         </div>
         {/* Chat inbox cards */}
         <div className="flex flex-col mt-3 scroll">
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
-          <InboxCard />
+          {chats.map((chat) => (
+            <InboxCard
+              key={chat.id}
+              chat={chat}
+              isSelected={chat.id === selectedChat.id}
+              onClick={() => handleChatSelect(chat)}
+            />
+          ))}
         </div>
       </div>
 
@@ -43,9 +79,9 @@ const AllChats = () => {
         <div>
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
-              <div className="text-2xl font-medium">Georgiana Aurax</div>
+              <div className="text-2xl font-medium">{selectedChat.name}</div>
               <div className="text-sm text-gray-400">
-                Last online at 7.30 a.m
+                Last online at {selectedChat.lastOnline}
               </div>
             </div>
             <div className="flex gap-6">
@@ -54,6 +90,16 @@ const AllChats = () => {
               <EllipsisVerticalIcon className="w-6 h-6 text-gray-600 cursor-pointer" />
             </div>
           </div>
+        </div>
+        <div className="flex-1 py-8">
+          {selectedChat.messages.map((message, index) => (
+            <div
+              key={index}
+              className="bg-gray-200 p-2 rounded-lg mb-4 w-fit max-w-[80%]"
+            >
+              {message}
+            </div>
+          ))}
         </div>
         <div className="w-full">
           <div className="flex items-center relative">
