@@ -9,6 +9,7 @@ import {
 import { PaperClipIcon } from "@heroicons/react/24/solid";
 
 import InboxCard from "./InboxCard";
+import ChatBubble from "./ChatBubble";
 
 const AllChats = () => {
   const chats = [
@@ -18,7 +19,29 @@ const AllChats = () => {
       image:
         "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       lastOnline: "7:30 a.m",
-      messages: ["Hi!", "How are you?", "Let's meet on Monday."],
+      messages: [
+        "Hi!",
+        "How are you?",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+        "Let's meet on Monday.",
+      ],
       lastMessage: "Let's meet on Monday.",
     },
     {
@@ -91,14 +114,13 @@ const AllChats = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 py-8">
+        <div className="flex-1 overflow-y-auto my-6 pr-2 scroll">
           {selectedChat.messages.map((message, index) => (
-            <div
+            <ChatBubble
               key={index}
-              className="bg-[#EEEEF8] p-3 rounded-lg mb-4 w-fit max-w-[80%] rounded-bl-none text-sm"
-            >
-              {message}
-            </div>
+              message={message}
+              isSent={index % 2 === 0 ? true : false}
+            />
           ))}
         </div>
         <div className="w-full">

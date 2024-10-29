@@ -28,8 +28,8 @@ const InboxCard = ({ chat, onClick, isSelected }) => {
           </div>
         </div>
         {/* Chat message */}
-        <div className="flex gap-2 text-xs">
-          <span className="text-[#7678ed]">You:</span>
+        <div className="flex gap-1 items-center text-xs">
+          <span className="text-[#7678ED]">You:</span>
           <span className="flex-1 text-gray-400 truncate w-0">
             {chat.lastMessage}
           </span>
