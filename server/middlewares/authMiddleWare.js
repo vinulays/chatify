@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwtConfig");
 
-const authMiddleware = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "Access Denied" });
 
@@ -14,4 +14,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = verifyToken;

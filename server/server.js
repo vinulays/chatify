@@ -1,7 +1,6 @@
 const express = require("express");
-const jwtConfig = require("./config/jwtConfig"); // Import JWT config
 const authRoutes = require("./routes/authRoutes");
-const jwt = require("jsonwebtoken");
+const verifyToken = require("./middlewares/authMiddleWare");
 
 const http = require("http");
 const { Server } = require("socket.io");
@@ -33,18 +32,8 @@ const server = http.createServer(app);
 
 connectDB();
 
+app.use(express.json());
 app.use("/api/auth", authRoutes);
-
-function verifyToken(req, res, next) {
-  const token = req.headers["authorization"];
-  if (!token) return res.status(403).send("Access denied. No token provided.");
-
-  jwt.verify(token.split(" ")[1], jwtConfig.secret, (err, decoded) => {
-    if (err) return res.status(401).send(err);
-    req.user = decoded;
-    next();
-  });
-}
 
 // Protected route example
 app.get("/api/protected", verifyToken, (req, res) => {
