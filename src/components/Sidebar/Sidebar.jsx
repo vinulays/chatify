@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -10,8 +10,14 @@ import {
   PencilSquareIcon,
   ArrowLeftEndOnRectangleIcon,
 } from "@heroicons/react/24/solid";
+import LogoutDialog from "../LogoutDialog";
 
 const Sidebar = () => {
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+
+  const openDialog = () => setIsLogoutDialogOpen(true);
+  const closeDialog = () => setIsLogoutDialogOpen(false);
+
   return (
     <div className="text-[#f9fafc] py-4 pl-1.5 flex flex-col justify-around min-h-screen gap-12">
       <div>
@@ -76,13 +82,16 @@ const Sidebar = () => {
       </div>
 
       <div>
-        <Link to="/">
-          <div className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300">
-            <ArrowLeftEndOnRectangleIcon className="h-[20px] w-[20px] fill-current" />
-            <p className="text-xs font-light">Log out</p>
-          </div>
-        </Link>
+        <button
+          onClick={openDialog}
+          className="flex flex-col text-gray-400 gap-2 justify-center items-center rounded-xl p-3 hover:text-white hover:bg-[#464646] transition duration-300"
+        >
+          <ArrowLeftEndOnRectangleIcon className="h-[20px] w-[20px] fill-current" />
+          <p className="text-xs font-light">Log out</p>
+        </button>
       </div>
+
+      <LogoutDialog isOpen={isLogoutDialogOpen} onClose={closeDialog} />
     </div>
   );
 };
