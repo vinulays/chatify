@@ -4,9 +4,9 @@ const ChatBubble = ({ message, isSent }) => {
   return (
     <div className={`flex ${isSent ? "justify-end" : "justify-start"}`}>
       <div
-        className={` p-3 rounded-lg mb-4 w-fit max-w-[80%] text-white text-sm ${
+        className={` p-3 rounded-lg mb-4 w-fit max-w-[80%] text-sm ${
           isSent
-            ? "bg-[#7678ED] rounded-br-none"
+            ? "bg-[#7678ED] rounded-br-none text-white"
             : "bg-[#EEEEF8] rounded-bl-none text-gray-900"
         }`}
       >
