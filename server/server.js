@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+
 const authRoutes = require("./routes/authRoutes");
 const verifyToken = require("./middlewares/authMiddleWare");
 
@@ -6,7 +8,14 @@ const http = require("http");
 const { Server } = require("socket.io");
 const connectDB = require("./config/db");
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
+app.use(cors(corsOptions));
+
 const server = http.createServer(app);
 
 // const io = new Server(server, {

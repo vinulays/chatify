@@ -1,48 +1,40 @@
-// import { io } from "socket.io-client";
-// import { useEffect, useState } from "react";
 import Layout from "./components/Layout/Layout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AllChats from "./components/AllChats";
 import Work from "./components/Work";
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import PrivateRoute from "./components/PrivateRoute";
 
-// const socket = io("http://localhost:5000");
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
-  // const [message, setMessage] = useState("");
-  // const [chatMessages, setChatMessages] = useState([]);
-
-  // useEffect(() => {
-  //   socket.on("chat message", (msg) => {
-  //     setChatMessages((prevMessages) => [...prevMessages, msg]);
-  //   });
-
-  //   // Cleanup socket connection on component unmount
-  //   return () => {
-  //     socket.off("chat message");
-  //   };
-  // }, []);
-
-  // const handleMessageSend = (e) => {
-  //   e.preventDefault();
-  //   if (message.trim()) {
-  //     socket.emit("chat message", message); // Emit message to server
-  //     setMessage(""); // Clear the input
-  //   }
-  // };
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<AllChats />} />
-          <Route path="work" element={<Work />} />
-          <Route path="friends" element={<Friends />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Layout />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<AllChats />} />
+            <Route path="work" element={<Work />} />
+            <Route path="friends" element={<Friends />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
