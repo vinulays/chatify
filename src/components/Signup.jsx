@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { signupUser } from "../features/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,14 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const notifyEmptyFields = () =>
+    toast.error("Please fill the required fields!", { position: "top-right" });
+
+  const notifyPasswordMismatch = () =>
+    toast.error("Passwords do not match!", {
+      position: "top-right",
+    });
 
   const dispatch = useDispatch();
   const { isAuthenticated, loading, error } = useSelector(
@@ -22,13 +31,26 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { username, email, password, confirmPassword } = formData;
+    if (!username || !email || !password || !confirmPassword) {
+      notifyEmptyFields();
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      notifyPasswordMismatch();
       return;
     }
 
     dispatch(signupUser(formData));
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { position: "top-right" });
+    }
+  }, [error]);
 
   if (isAuthenticated) {
     return <Navigate to="/" />;
@@ -36,6 +58,7 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
+      <Toaster />
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white p-8 rounded-lg"
@@ -46,8 +69,6 @@ const Signup = () => {
             Create your account
           </h2>
         </div>
-
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <div className="mb-4">
           <label
@@ -63,7 +84,6 @@ const Signup = () => {
               type="text"
               value={formData.username}
               onChange={handleChange}
-              required
               autoComplete="username"
               className="block w-full rounded-md border-0 px-4 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
             />
@@ -84,7 +104,6 @@ const Signup = () => {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              required
               autoComplete="email"
               className="block w-full rounded-md border-0 px-4 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
             />
@@ -107,7 +126,6 @@ const Signup = () => {
               type="password"
               value={formData.password}
               onChange={handleChange}
-              required
               autoComplete="current-password"
               className="block px-4 py-2 w-full rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
             />
@@ -129,7 +147,6 @@ const Signup = () => {
               type="password"
               value={formData.confirmPassword}
               onChange={handleChange}
-              required
               autoComplete="current-password"
               className="block px-4 py-2 w-full rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
             />
