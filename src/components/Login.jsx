@@ -100,7 +100,7 @@ const Login = () => {
             loading ? "cursor-not-allowed" : ""
           }`}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Signing in..." : "Sign in"}
         </button>
 
         <p className="mt-10 text-center text-sm/6 text-gray-500">
