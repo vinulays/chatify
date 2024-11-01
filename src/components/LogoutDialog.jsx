@@ -1,4 +1,3 @@
-// src/components/LogoutDialog.js
 import { Fragment } from "react";
 import {
   Dialog,
@@ -13,9 +12,10 @@ import { logout } from "../features/authSlice";
 const LogoutDialog = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
+  // * dispatching the logout action
   const handleLogout = () => {
     dispatch(logout());
-    onClose(); // Close dialog after logout
+    onClose();
   };
 
   return (
