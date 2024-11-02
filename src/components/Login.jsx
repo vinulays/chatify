@@ -1,8 +1,9 @@
 // src/components/Login.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { loginUser } from "../features/authSlice";
+import { clearLoginError, loginUser } from "../features/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -20,12 +21,23 @@ const Login = () => {
     dispatch(loginUser(formData));
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { position: "top-right" });
+    }
+
+    return () => {
+      dispatch(clearLoginError());
+    };
+  }, [error, dispatch]);
+
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
+      <Toaster />
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white p-8 rounded-lg"
@@ -36,10 +48,6 @@ const Login = () => {
             Sign in to your account
           </h2>
         </div>
-
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-4">{error}</p>
-        )}
 
         <div className="mb-4">
           <label

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { signupUser } from "../features/authSlice";
+import { clearSignupError, signupUser } from "../features/authSlice";
 import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
@@ -21,7 +21,7 @@ const Signup = () => {
     });
 
   const dispatch = useDispatch();
-  const { isAuthenticated, loading, error } = useSelector(
+  const { isAuthenticated, loading, signupError } = useSelector(
     (state) => state.auth
   );
 
@@ -47,10 +47,14 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    if (error) {
-      toast.error(error, { position: "top-right" });
+    if (signupError) {
+      toast.error(signupError, { position: "top-right" });
     }
-  }, [error]);
+
+    return () => {
+      dispatch(clearSignupError());
+    };
+  }, [signupError, dispatch]);
 
   if (isAuthenticated) {
     return <Navigate to="/" />;
