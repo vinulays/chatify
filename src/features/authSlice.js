@@ -7,7 +7,9 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await login(credentials);
       localStorage.setItem("token", response.token);
-      return response.token;
+      localStorage.setItem("username", response.username);
+
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -19,6 +21,7 @@ export const signupUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await signup(userData);
+
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -34,12 +37,14 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     signupError: null,
+    username: localStorage.getItem("username") || null,
   },
   reducers: {
     logout: (state) => {
       localStorage.removeItem("token");
       state.token = null;
       state.isAuthenticated = false;
+      state.username = null;
     },
     clearSignupError: (state) => {
       state.signupError = null;
@@ -56,8 +61,9 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.token = action.payload;
+        state.token = action.payload.token;
         state.isAuthenticated = true;
+        state.username = action.payload.username;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -70,7 +76,7 @@ const authSlice = createSlice({
       .addCase(signupUser.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
-        state.user = action.payload.user;
+        state.username = action.payload.username;
       })
       .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;

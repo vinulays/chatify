@@ -1,7 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  return <div>Profile</div>;
+  const username = useSelector((state) => state.auth.username);
+  return (
+    <div>
+      {username ? <p>Welcome, {username}!</p> : <p>Loading user name...</p>}
+    </div>
+  );
 };
 
 export default Profile;
