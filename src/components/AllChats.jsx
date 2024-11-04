@@ -10,6 +10,7 @@ import { PaperClipIcon } from "@heroicons/react/24/solid";
 
 import InboxCard from "./InboxCard";
 import ChatBubble from "./ChatBubble";
+import socket from "../socket";
 
 const AllChats = () => {
   const chats = [

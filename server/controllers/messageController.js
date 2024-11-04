@@ -13,6 +13,8 @@ exports.getMessageHistory = async (req, res) => {
 
     res.status(200).json(messages);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching message history" });
+    res
+      .status(500)
+      .json({ message: "Error fetching message history", error: error });
   }
 };
